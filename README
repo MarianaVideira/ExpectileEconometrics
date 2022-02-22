@@ -1,7 +1,7 @@
 Econometrics II Project for Nova SBE PhD Program. 
 Use expectile regression to understand the evolution of wages in Portugal. 
-Comparison with basic OLS, FE and RE. 
-Data: Quadros de Portugal (1986-onwards).
+Comparison with basic High Dimensional FE. 
+Data: Quadros de Pessoal (1986-onwards, Portugal).
 
 Authors: 
 Frederica Mendonça
