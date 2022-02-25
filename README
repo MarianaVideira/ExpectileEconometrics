@@ -1,7 +1,25 @@
 Econometrics II Project for Nova SBE PhD Program. 
-Use expectile regression to understand the evolution of wages in Portugal. 
-Comparison with basic High Dimensional FE. 
-Data: Quadros de Pessoal (1986-onwards, Portugal).
+
+To understand how we can use Expectile regression with High Dimensional Fixed Effects on longitudinal data, and more specifically on Portuguese matched employer employee admnistrative. We check for the consistency of the results comparing them with other more commonly used techniques in the literature. 
+
+
+We will use four models: OLS regression with high dimensional fixed effects (at individual and company level) and fixed effects (at individual level), Quantile Regression with Fixed effects(at individual level), Expectile Regression with high dimensional fixed effects (at individual and company level).
+
+We will do four main comparisons:
+
+1. Compare Expectile Regressino with Quantile Regression, both with High Dimensional Fixed Effects;
+
+2. Comparison between basic OLS with High Dimensional FE and Expectile Regression with FE (to compare with the mean of one to the other); 
+
+3. Quantile regression with Fixed Effects to compare with basic OLS with Fixed Effects; 
+
+4. Compare basic OLS with Fixed Effects and High Dimensional Fixed Effects. 
+
+We will do at least three regressions: levels, logs and Changes Differences on y. 
+We will also compare the base wage and total wage, which include subsidies and bonus. 
+
+# Regressions: 24
+Data: Quadros de Pessoal (2002-onwards, Portugal).
 
 Authors: 
 Frederica Mendonça
