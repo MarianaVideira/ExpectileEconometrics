@@ -104,11 +104,11 @@ data <- data %>% select(id, year, dwage)
 # write.csv(data, "dwage.csv")
 
 #,
-#         dbonus = , lag(wage, n=1, default = NA),
- #        dwage = lag(wage, n=1, default = NA),
-  #       dlbase = lag(wage, n=1, default = NA),
-   #      dlbonus = lag(wage, n=1, default = NA),
-    #     dlwage = lag(wage, n=1, default = NA)) %>%
+#         dbonus = , lag(bonus, n=1, default = NA),
+ #        dbase = lag(base, n=1, default = NA),
+  #       dlbase = lag(lbase, n=1, default = NA),
+   #      dlbonus = lag(lbonus, n=1, default = NA),
+    #     dlwage = lag(lwage, n=1, default = NA)) %>%
   #ungroup()
 
 
