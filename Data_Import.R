@@ -1,5 +1,6 @@
 if(!require("tidyverse")) install.packages("tidyverse")
-library("tidyverse", "readr", "haven") 
+library(c("tidyverse", "readr","dplyr"))
+library(haven)
 
 # 0.  Data Import  --------------------------------------------------------
 
@@ -12,10 +13,15 @@ dir <- getwd()
 
 filedta <- "marlon_data.dta"
  
-# Alternatively 
+# Import 
 dat <- read_dta(filedta, encoding = NULL,col_select = NULL, skip = 0,
                 n_max = Inf,
                 .name_repair = "unique")
+
+# filter obs year & clear duplicates
+dat <- dat %>% 
+  filter(ano > 2001) %>%
+  distinct()
 
 
 # *0.2. Using CSV ---------------------------------------------------------

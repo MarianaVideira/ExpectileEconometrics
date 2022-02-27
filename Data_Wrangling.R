@@ -1,44 +1,37 @@
 # 0.  Data Wrangling ------------------------------------------------------
 if(!require("tidyverse")) install.packages("tidyverse")
-library(tidyverse)
+if(!require("data.table")) install.packages("data.table")
+library(tidyverse, data.table)
 
 # Check Data 
 head(dat)
 
-# filter obs year 
-dat <- dat %>% 
-  filter(ano > 1995)
-
 # Renaming Columns and Adding Columns
-data <- dat %>% 
+data1 <- dat %>% 
   mutate(bonus = sum(remhextra,outrasprest,subsidios),
-         salary = sum(bonus, rembase),
-         log_salary = log(salary),
-         log_salarybase = log(rembase),
-         log_bonus = log(bonus),
+         wage = sum(bonus, rembase),
+         lwage = log(wage),
+         lbase = log(rembase),
+         lbonus = log(bonus),
          hours = sum(hnormais, hextra),
-         sales_thousand_euros = vendas_euro/1000,
-         salespc = sales_thousand_euros/pessoas,
+         salesK = vendas_euro/1000,
+         salespc = salesK/pessoas,
          gender = case_when(
-           sexo == 1 ~ "male",
-           sexo == 2 ~ "female"),
-         dummy_gender = case_when(
-           sexo == 1 ~ 1,
-           sexo == 2 ~ 0,
-           TRUE ~ as.numeric(NA)),
-         size_small = case_when(
+           sexo == 1 ~ 1, # male
+           sexo == 2 ~ 0), # female
+         firmS = case_when(
            pessoas > 9 & pessoas < 20 ~ 1,
            pessoas > 19 ~ 0,
            pessoas < 10 ~ 0),
-         size_medium = case_when(
+         firmM = case_when(
            pessoas > 19 & pessoas < 100 ~ 1,
            pessoas < 20 ~ 0,
            pessoas > 99 ~ 0),
-         size_big = case_when(
+         firmB = case_when(
            pessoas > 99 & pessoas < 500 ~ 1,
            pessoas < 100 ~ 0,
            pessoas > 499 ~ 0),
-         size_large = case_when(
+         firmL = case_when(
            pessoas > 499 ~ 1,
            pessoas < 500 ~ 0),
          portuguese = case_when(
@@ -48,15 +41,15 @@ data <- dat %>%
          primary = case_when(
            sect_comp > 0 & sect_comp <= 3 ~ 1, 
            sect_comp > 3 ~ 0),
-         low_manufactoring = case_when(
+         manufL = case_when(
            sect_comp >= 4 & sect_comp <= 8 ~ 1,
            sect_comp > 8 ~ 0,
            sect_comp < 4 ~ 0),
-         medium_manufactoring = case_when(
+         manufM = case_when(
            sect_comp >= 9 & sect_comp <= 14 ~ 1,
            sect_comp > 14 ~ 0,
            sect_comp < 9 ~ 0),
-         high_manufactoring = case_when(
+         manufH = case_when(
            sect_comp >= 15 & sect_comp <= 18 ~ 1,
            sect_comp > 18 ~ 0,
            sect_comp < 15 ~ 0),
@@ -74,7 +67,7 @@ data <- dat %>%
            sect_comp >= 24 & sect_comp <= 25 ~ 1,
            sect_comp > 25 ~ 0,
            sect_comp < 24 ~ 0),
-         publicadministration = case_when(
+         publicadmin = case_when(
            sect_comp == 26 ~ 1,
            sect_comp != 26 ~ 0),
          education = case_when(
@@ -95,9 +88,19 @@ data <- dat %>%
          ) %>%
   select(-sexo, -vendas_euro, -pessoas, -hnormais, -hextra, -remhextra,-outrasprest,
          -subsidios, -nacion) %>%
-  rename(year = ano, firm = empresa, salarybase = rembase, college = hab_8910) %>%
+  rename(year = ano, firm = empresa, wage_base = rembase, college = hab_8910) %>%
   arrange(id, year)
 
 # Analyze first observations
 head(data)
 
+# Create the first differences
+data <- data1 %>% 
+  group_by(id,year) %>%
+  mutate(dwage = lag(wage, n=1, default = NA))
+
+#  dbonus = , 
+# dwage = ,
+# dlbase = ,
+# dlbonus = ,
+# dlwage = 
