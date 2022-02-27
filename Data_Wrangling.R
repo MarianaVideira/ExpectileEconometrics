@@ -7,7 +7,7 @@ library(tidyverse, data.table)
 head(dat)
 
 # Renaming Columns and Adding Columns
-data1 <- dat %>% 
+dat <- dat %>% 
   mutate(bonus = sum(remhextra,outrasprest,subsidios),
          wage = sum(bonus, rembase),
          lwage = log(wage),
@@ -92,15 +92,23 @@ data1 <- dat %>%
   arrange(id, year)
 
 # Analyze first observations
-head(data)
+head(dat)
 
 # Create the first differences
-data <- data1 %>% 
+data <- dat %>% 
   group_by(id,year) %>%
-  mutate(dwage = lag(wage, n=1, default = NA))
+  mutate(dwage = lag(wage, n=1, default = NA)) 
 
-#  dbonus = , 
-# dwage = ,
-# dlbase = ,
-# dlbonus = ,
-# dlwage = 
+data <- data %>% select(id, year, dwage) 
+
+# write.csv(data, "dwage.csv")
+
+#,
+#         dbonus = , lag(wage, n=1, default = NA),
+ #        dwage = lag(wage, n=1, default = NA),
+  #       dlbase = lag(wage, n=1, default = NA),
+   #      dlbonus = lag(wage, n=1, default = NA),
+    #     dlwage = lag(wage, n=1, default = NA)) %>%
+  #ungroup()
+
+
