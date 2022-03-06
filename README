@@ -11,7 +11,7 @@ We will do four main comparisons:
 
 2. Comparison between basic OLS with High Dimensional FE and Expectile Regression with FE (to compare with the mean of one to the other); 
 
-3. Quantile regression with Fixed Effects to compare with basic OLS with Fixed Effects; 
+3. Quantile regression with Fixed Effects to compare with pooled OLS with Fixed Effects; 
 
 4. Compare basic OLS with Fixed Effects and High Dimensional Fixed Effects. 
 
