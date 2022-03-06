@@ -1,7 +1,6 @@
 if(!require("tidyverse")) install.packages("tidyverse")
 if(!require("easypackages")) install.packages("easypackages") # easier to load multiple packages
-library("tidyverse","readr","dplyr")
-library(haven)
+library(tidyverse,readr,dplyr,haven)
 
 
 # 0.  Data Import  --------------------------------------------------------
@@ -31,7 +30,7 @@ dat <- dat %>%
 
 # Use sample of data (10,000 ids)
 nID <- length(unique(dat$id))
-p = 10000/nrow(dat)
+p = 100000/nrow(dat)
 set.seed(5)
 inSampleID <- sample(unique(dat$id), round(nID * p), replace=FALSE)
 data <- dat[dat$id %in% inSampleID, ] 

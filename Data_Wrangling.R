@@ -1,5 +1,4 @@
 # 0.  Data Wrangling ------------------------------------------------------
-if(!require("tidyverse")) install.packages("tidyverse")
 if(!require("data.table")) install.packages("data.table")
 library(tidyverse, data.table)
 
@@ -20,14 +19,15 @@ data <- data %>%
 # Renaming Columns and Adding Columns
 data <- data %>%
   mutate(
+    age2 = age*age,
     lwage = log(wage),
     lbase = log(rembase),
     lbonus = log(bonus),
     salesK = vendas_euro/1000,
     salespc = salesK/pessoas,
-    gender = case_when(
-      sexo == 1 ~ 1, # male
-      sexo == 2 ~ 0), # female
+    female = case_when(
+      sexo == 1 ~ 0, # male
+      sexo == 2 ~ 1), # female
     firmS = case_when(
     pessoas > 9 & pessoas < 20 ~ 1,
     pessoas > 19 ~ 0,
@@ -95,8 +95,8 @@ data <- data %>%
       sect_comp > 3 & sect_comp < 29 ~ 0,
       sect_comp > 31 ~ 0),
     highschool = case_when(
-      hab_5 == 1 | hab_67 == 1 | hab_8910 == 1 ~ 1,
-      hab_5 !=1 & hab_67 != 1 & hab_67 != 1 ~ 0) 
+      hab_5 == 1 | hab_67 == 1 ~ 1,
+      hab_5 !=1 & hab_67 != 1 ~ 0) 
     ) %>%
   select(-sexo, -vendas_euro, -pessoas, -hnormais, -hextra, -remhextra,-outrasprest,-subsidios, -nacion) %>%
   rename(year = ano, firm = empresa, base = rembase, college = hab_8910) %>%
@@ -118,7 +118,7 @@ data <- data %>%
   ungroup()
 
 
-# Check for other missing variables and finalize new data panel (select)
-# Run regressions
-
+# Create year as factor (to include as dummies)
+data$year <- factor(data$year) 
+levels(data$year)
 
