@@ -1,0 +1,15 @@
+Package: erfe
+Type: Package
+Title: Estimate the expectile fixed effect model for longitudinal data
+Version: 1.0
+Date: 2019-11-25
+Author: Amadou Barry
+Maintainer: <barryhafia@gmail.com>
+Description: More about what it does (maybe more than one line)
+License: What license is it under?
+Imports: Rcpp (>= 1.0.2)
+Depends:
+    R (>= 3.2.0),
+    Rcpp,
+    RcppArmadillo
+LinkingTo: Rcpp, RcppArmadillo
